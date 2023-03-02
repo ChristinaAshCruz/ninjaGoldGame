@@ -66,7 +66,7 @@ pageEncoding="UTF-8"%>
               <h5 class="card-title">House</h5>
               <p>(earns 2-5 gold)</p>
               <form action="/find-gold" method="post">
-                <input type="hidden" name="farm" />
+                <input type="hidden" name="house" />
                 <input type="submit" value="Find Gold!" class="btn" />
               </form>
             </div>
