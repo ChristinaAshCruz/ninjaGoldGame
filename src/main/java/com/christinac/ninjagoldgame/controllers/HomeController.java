@@ -1,6 +1,7 @@
 package com.christinac.ninjagoldgame.controllers;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
@@ -32,21 +33,19 @@ public class HomeController {
 	
 	@SuppressWarnings("unchecked")
 	@PostMapping("/find-gold")
-	public String findGold(HttpSession session, @RequestParam(value="farm", required=false) String farm, @RequestParam(value="house", required=false) String house, @RequestParam(value="cave", required=false) String cave, @RequestParam(value="quest", required=false) String quest) {
-		
+	public String findGold(HttpSession session, @RequestParam(value="farm", required=false) String farm, @RequestParam(value="house", required=false) String house, @RequestParam(value="cave", required=false) String cave, @RequestParam(value="quest", required=false) String quest, @RequestParam(value="steal", required=false) String steal) {
 		// testing out how much to give each time
 		ArrayList<String> actionList = (ArrayList<String>) session.getAttribute("actionList");
 		if(farm != null) {
 			int goldAmount = (int) session.getAttribute("goldAmount");
-			int newGoldAmount = 10;
+			int newGoldAmount = new Random().nextInt((20-10) + 10);
 			session.setAttribute("goldAmount", (goldAmount + newGoldAmount));
-			
 			actionList.add("Found " + newGoldAmount + " gold in the Farm !");		
 			session.setAttribute("actionList", actionList);
 		}
 		if(house != null) {
 			int goldAmount = (int) session.getAttribute("goldAmount");
-			int newGoldAmount = 5;
+			int newGoldAmount = new Random().nextInt((10-5) + 5);
 			session.setAttribute("goldAmount", (goldAmount + newGoldAmount));
 			
 			actionList.add("Found " + newGoldAmount + " gold in the House !");		
@@ -54,7 +53,7 @@ public class HomeController {
 		}
 		if(cave != null) {
 			int goldAmount = (int) session.getAttribute("goldAmount");
-			int newGoldAmount = 2;
+			int newGoldAmount = new Random().nextInt((5-2) + 2);
 			session.setAttribute("goldAmount", (goldAmount + newGoldAmount));
 			
 			actionList.add("Found " + newGoldAmount + " gold in the Cave !");		
@@ -62,13 +61,26 @@ public class HomeController {
 		}
 		if(quest != null) {
 			int goldAmount = (int) session.getAttribute("goldAmount");
-			int newGoldAmount = -10;
+			int newGoldAmount = new Random().nextInt(100)-50;
 			session.setAttribute("goldAmount", (goldAmount + newGoldAmount));
 			if (newGoldAmount < 0) {
-				actionList.add("You lost" + newGoldAmount + " gold during the quest!");		
+				actionList.add("You lost " + newGoldAmount + " gold during the quest!");		
 				session.setAttribute("actionList", actionList);
 			} else {
 				actionList.add("Found " + newGoldAmount + " gold during the quest!");		
+				session.setAttribute("actionList", actionList);
+			}
+			
+		}
+		if(steal != null) {
+			int goldAmount = (int) session.getAttribute("goldAmount");
+			int newGoldAmount = new Random().nextInt(600)-300;
+			session.setAttribute("goldAmount", (goldAmount + newGoldAmount));
+			if (newGoldAmount < 0) {
+				actionList.add("You got caught while stealing! You lost " + newGoldAmount + " gold!");		
+				session.setAttribute("actionList", actionList);
+			} else {
+				actionList.add("Success! You stole " + newGoldAmount + " gold!");		
 				session.setAttribute("actionList", actionList);
 			}
 			
