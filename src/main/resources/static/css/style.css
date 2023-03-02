@@ -43,8 +43,8 @@ span{
 	border-radius: 15px;
 	padding: 15px;
 	margin:25px 50px;
+	flex-wrap: wrap;
 }
-
 .card {
 	background-color:#EFE3CA;
 	border-color:#DB9232;

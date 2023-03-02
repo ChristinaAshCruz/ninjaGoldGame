@@ -84,6 +84,18 @@ pageEncoding="UTF-8"%>
             </div>
           </div>
         </div>
+        <div class="col-sm-3 mt-2">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Steal</h5>
+              <p>(earns/takes 0-300 gold)</p>
+              <form action="/find-gold" method="post">
+                <input type="hidden" name="steal" />
+                <input type="submit" value="Find Gold!" class="btn" />
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="activities-row mx-5 mb-3">
